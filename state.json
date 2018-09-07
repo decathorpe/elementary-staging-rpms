@@ -1,0 +1,74 @@
+{
+    "_default": {
+        "1": {
+            "name": "switchboard-plug-datetime",
+            "package_name": "switchboard-plug-datetime",
+            "package_version": "0.1.3",
+            "rpm_last_release": "1%{?dist}",
+            "rpm_last_version": "0.1.3",
+            "url_last_version": "0.1.3"
+        },
+        "2": {
+            "name": "switchboard-plug-locale",
+            "package_name": "switchboard-plug-locale",
+            "package_version": "0.2.3",
+            "rpm_last_release": "6%{?dist}",
+            "rpm_last_version": "0.2.3",
+            "url_last_version": "0.2.3"
+        },
+        "3": {
+            "name": "switchboard-plug-parental-controls",
+            "package_name": "switchboard-plug-parental-controls",
+            "package_version": "0.1.4",
+            "rpm_last_release": "1%{?dist}",
+            "rpm_last_version": "0.1.4",
+            "url_last_version": "0.1.4"
+        },
+        "4": {
+            "name": "switchboard-plug-power",
+            "package_name": "switchboard-plug-power",
+            "package_version": "0.3.3",
+            "rpm_last_release": "1%{?dist}",
+            "rpm_last_version": "0.3.3",
+            "url_last_version": "0.3.3"
+        },
+        "5": {
+            "name": "switchboard-plug-security-privacy",
+            "package_name": "switchboard-plug-security-privacy",
+            "package_version": "0.1.3",
+            "rpm_last_release": "1%{?dist}",
+            "rpm_last_version": "0.1.3",
+            "url_last_version": "0.1.3"
+        },
+        "6": {
+            "name": "switchboard-plug-sharing",
+            "package_name": "switchboard-plug-sharing",
+            "package_version": "0.1.2",
+            "rpm_last_release": "2%{?dist}",
+            "rpm_last_version": "0.1.2",
+            "url_last_version": "0.1.2"
+        },
+        "7": {
+            "name": "switchboard-plug-useraccounts",
+            "package_name": "switchboard-plug-useraccounts",
+            "package_version": "0.1.6",
+            "rpm_last_release": "5%{?dist}",
+            "rpm_last_version": "0.1.6",
+            "url_last_version": "0.1.6"
+        },
+        "8": {
+            "name": "pantheon-desktop",
+            "package_name": "pantheon-desktop",
+            "package_version": "0.4",
+            "rpm_last_release": "1%{?dist}",
+            "rpm_last_version": "0.4"
+        },
+        "9": {
+            "name": "pantheon-session",
+            "package_name": "pantheon-session",
+            "package_version": "0.4",
+            "rpm_last_release": "1%{?dist}",
+            "rpm_last_version": "0.4"
+        }
+    }
+}
