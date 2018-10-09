@@ -1,20 +1,20 @@
 %global __provides_exclude_from ^%{_libdir}/switchboard/.*\\.so$
 
-Name:           switchboard-plug-useraccounts
+%global plug_name useraccounts
+%global plug_type system
+
+Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard User Accounts Plug
-Version:        0.1.6
-Release:        5%{?dist}
+Version:        2.1.7
+Release:        1%{?dist}
 License:        LGPLv3
 
 URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:  cmake
-BuildRequires:  gcc
-BuildRequires:  gcc-c++
 BuildRequires:  gettext
-BuildRequires:  vala >= 0.22.0
-BuildRequires:  vala-tools
+BuildRequires:  meson
+BuildRequires:  vala >= 0.34.1
 
 BuildRequires:  pkgconfig(accountsservice)
 BuildRequires:  pkgconfig(gee-0.8)
@@ -39,30 +39,30 @@ Switchboard Plug for managing local user accounts.
 
 
 %build
-mkdir build && pushd build
-%cmake ..
-%make_build
-popd
+%meson
+%meson_build
 
 
 %install
-pushd build
-%make_install
-popd
+%meson_install
 
-%find_lang useraccounts-plug
+%find_lang %{plug_name}-plug
 
 
-%files -f useraccounts-plug.lang
+%files -f %{plug_name}-plug.lang
 %doc README.md
 %license COPYING COPYRIGHT
 
-%{_libdir}/switchboard/system/pantheon-useraccounts/
+%{_libdir}/switchboard/system/lib%{plug_name}.so
+%{_libdir}/switchboard/system/pantheon-%{plug_name}/
 
 %{_datadir}/polkit-1/actions/org.pantheon.switchboard.user-accounts.policy
 
 
 %changelog
+* Tue Oct 09 2018 Fabio Valentini <decathorpe@gmail.com> - 2.1.7-1
+- Update to version 2.1.7.
+
 * Wed Aug 29 2018 Fabio Valentini <decathorpe@gmail.com> - 0.1.6-5
 - Add missing BR: gcc, gcc-c++.
 
