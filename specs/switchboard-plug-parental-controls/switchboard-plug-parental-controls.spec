@@ -32,7 +32,7 @@ Supplements:    switchboard%{?_isa}
 
 
 %description
-Switchboard Plug for managing local user accounts.
+An easy parental controls plug.
 
 
 %prep
