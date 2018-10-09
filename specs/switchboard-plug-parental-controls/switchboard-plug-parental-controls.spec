@@ -1,8 +1,11 @@
 %global __provides_exclude_from ^%{_libdir}/switchboard/.*\\.so$
 
-Name:           switchboard-plug-parental-controls
+%global plug_name parental-controls
+%global plug_type system
+
+Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard Parental Controls plug
-Version:        0.1.4
+Version:        2.1.5
 Release:        1%{?dist}
 License:        GPLv3
 
@@ -14,7 +17,6 @@ BuildRequires:  gettext
 BuildRequires:  meson
 BuildRequires:  systemd
 BuildRequires:  vala >= 0.34.1
-BuildRequires:  vala-tools
 
 BuildRequires:  pkgconfig(accountsservice)
 BuildRequires:  pkgconfig(glib-2.0) >= 2.32
@@ -30,7 +32,7 @@ Supplements:    switchboard%{?_isa}
 
 
 %description
-An easy parental controls plug.
+Switchboard Plug for managing local user accounts.
 
 
 %prep
@@ -45,7 +47,7 @@ An easy parental controls plug.
 %install
 %meson_install
 
-%find_lang parental-controls-plug
+%find_lang %{plug_name}-plug
 
 
 %check
@@ -63,29 +65,32 @@ desktop-file-validate \
 %systemd_postun_with_restart pantheon-parental-controls.service
 
 
-%files -f parental-controls-plug.lang
+%files -f %{plug_name}-plug.lang
 %doc README.md
 %license COPYING
 
-%dir %{_sysconfdir}/pantheon-parental-controls
-%config(noreplace) %{_sysconfdir}/pantheon-parental-controls/daemon.conf
+%dir %{_sysconfdir}/pantheon-%{plug_name}
+%config(noreplace) %{_sysconfdir}/pantheon-%{plug_name}/daemon.conf
 
 %{_sysconfdir}/dbus-1/system.d/org.pantheon.ParentalControls.conf
 
-%{_bindir}/pantheon-parental-controls-daemon
+%{_bindir}/pantheon-%{plug_name}-daemon
 
-%{_libdir}/switchboard/system/libparental-controls.so
+%{_libdir}/switchboard/%{plug_type}/lib%{plug_name}.so
 
-%{_libexecdir}/pantheon-parental-controls-client
+%{_libexecdir}/pantheon-%{plug_name}-client
 
-%{_datadir}/applications/pantheon-parental-controls-client.desktop
+%{_datadir}/applications/pantheon-%{plug_name}-client.desktop
 %{_datadir}/dbus-1/system-services/org.pantheon.ParentalControls.service
-%{_datadir}/polkit-1/actions/org.pantheon.switchboard.parental-controls.policy
+%{_datadir}/polkit-1/actions/org.pantheon.switchboard.%{plug_name}.policy
 
-%{_unitdir}/pantheon-parental-controls.service
+%{_unitdir}/pantheon-%{plug_name}.service
 
 
 %changelog
+* Tue Oct 09 2018 Fabio Valentini <decathorpe@gmail.com> - 2.1.5-1
+- Update to version 2.1.5.
+
 * Fri Jul 06 2018 Fabio Valentini <decathorpe@gmail.com> - 0.1.4-1
 - Update to version 0.1.4.
 
