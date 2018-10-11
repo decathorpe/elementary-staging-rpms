@@ -1,16 +1,16 @@
 %global __provides_exclude_from ^%{_libdir}/switchboard/.*\\.so$
 
-Name:           switchboard-plug-power
+%global plug_name power
+%global plug_type hardware
+
+Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard Power Plug
-Version:        0.3.3
+Version:        2.3.4
 Release:        1%{?dist}
 License:        GPLv3
 
 URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-
-# Add patch to not use (dysfunctional) elementary-dpms-helper
-Patch0:         00-no-e-dpms-helper.patch
 
 BuildRequires:  gettext
 BuildRequires:  meson
@@ -23,10 +23,11 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(polkit-gobject-1)
 BuildRequires:  pkgconfig(switchboard-2.0)
 
-Requires:       dbus
 Requires:       switchboard%{?_isa}
-
 Supplements:    switchboard%{?_isa}
+
+Requires:       dbus
+Requires:       elementary-dpms-helper
 
 
 %description
@@ -45,16 +46,16 @@ Control system power consumption with this Switchboard preference plug.
 %install
 %meson_install
 
-%find_lang power-plug
+%find_lang %{plug_name}-plug
 
 
-%files -f power-plug.lang
+%files -f %{plug_name}-plug.lang
 %doc README.md
 %license COPYING
 
 %config(noreplace) %{_sysconfdir}/dbus-1/system.d/io.elementary.logind.helper.conf
 
-%{_libdir}/switchboard/hardware/libpower.so
+%{_libdir}/switchboard/%{plug_type}/lib%{plug_name}.so
 
 %{_libexecdir}/io.elementary.logind.helper
 
@@ -63,6 +64,9 @@ Control system power consumption with this Switchboard preference plug.
 
 
 %changelog
+* Thu Oct 11 2018 Fabio Valentini <decathorpe@gmail.com> - 2.3.4-1
+- Update to version 2.3.4.
+
 * Fri Jun 08 2018 Fabio Valentini <decathorpe@gmail.com> - 0.3.3-1
 - Update to version 0.3.3.
 
