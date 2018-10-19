@@ -1,20 +1,23 @@
 %global __provides_exclude_from ^%{_libdir}/switchboard/.*\\.so$
 
+%global plug_type personal
+%global plug_name locale
+
+%global appname io.elementary.switchboard.locale
+
 Name:           switchboard-plug-locale
 Summary:        Adjust Locale settings from Switchboard
-Version:        0.2.3
-Release:        6%{?dist}
+Version:        2.4.0
+Release:        1%{?dist}
 License:        LGPLv3
 
 URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:  cmake
-BuildRequires:  gcc
-BuildRequires:  gcc-c++
 BuildRequires:  gettext
-BuildRequires:  vala >= 0.22.0
-BuildRequires:  vala-tools
+BuildRequires:  libappstream-glib
+BuildRequires:  meson
+BuildRequires:  vala
 
 BuildRequires:  pkgconfig(accountsservice)
 BuildRequires:  pkgconfig(glib-2.0) >= 2.32
@@ -25,6 +28,7 @@ BuildRequires:  pkgconfig(ibus-1.0)
 BuildRequires:  pkgconfig(polkit-gobject-1)
 BuildRequires:  pkgconfig(switchboard-2.0)
 
+Requires:       switchboard%{?_isa}
 Supplements:    switchboard%{?_isa}
 
 
@@ -37,31 +41,37 @@ Adjust Locale settings from Switchboard.
 
 
 %build
-mkdir build && pushd build
-%cmake ..
-%make_build
-popd
+%meson
+%meson_build
 
 
 %install
-pushd build
-%make_install
-popd
+%meson_install
 
-%find_lang locale-plug
+%find_lang %{plug_name}-plug
 
 
-%files -f locale-plug.lang
+%check
+appstream-util validate-relax --nonet \
+    %{buildroot}/%{_datadir}/metainfo/%{appname}.appdata.xml
+
+
+%files -f %{plug_name}-plug.lang
 %doc README.md
 %license COPYING
 
-%{_libdir}/switchboard/personal/pantheon-locale/
+%{_libdir}/switchboard/%{plug_type}/lib%{plug_name}-plug.so
+%{_libdir}/switchboard/%{plug_type}/pantheon-%{plug_name}/
 
-%{_datadir}/glib-2.0/schemas/org.pantheon.switchboard.plug.locale.gschema.xml
-%{_datadir}/polkit-1/actions/org.pantheon.switchboard.locale.policy
+%{_datadir}/glib-2.0/schemas/%{appname}.gschema.xml
+%{_datadir}/metainfo/%{appname}.appdata.xml
+%{_datadir}/polkit-1/actions/%{appname}.policy
 
 
 %changelog
+* Fri Oct 19 2018 Fabio Valentini <decathorpe@gmail.com> - 2.4.0-1
+- Update to version 2.4.0.
+
 * Wed Aug 29 2018 Fabio Valentini <decathorpe@gmail.com> - 0.2.3-6
 - Add missing BR: gcc, gcc-c++.
 
