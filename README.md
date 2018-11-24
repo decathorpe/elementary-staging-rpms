@@ -38,10 +38,10 @@ These meta-packages are provided only as a convenience to pull in all Pantheon
 desktop components (`pantheon-session`) or the whole elementaryOS experience
 (`pantheon-desktop`).
 
-| package name     | f27  | f28  | f29  | rawhide |
-| ---------------- | ---- | ---- | ---- | ------- |
-| pantheon-desktop | DONE | DONE | DONE | DONE    |
-| pantheon-session | DONE | DONE | DONE | DONE    |
+| package name     | f28  | f29  | rawhide |
+| ---------------- | ---- | ---- | ------- |
+| pantheon-desktop | DONE | DONE | DONE    |
+| pantheon-session | DONE | DONE | DONE    |
 
 
 ### switchboard plugs
@@ -50,7 +50,7 @@ These switchboard plugs have issues as outlined above. There are unofficial
 packages for them for completeness, but it is not guaranteed that they work at
 all (or as expected).
 
-| package name                         | f27  | f28  | rawhide |
+| package name                         | f28  | f29  | rawhide |
 | ------------------------------------ | ---- | ---- | ------- |
 | [switchboard-plug-datetime]          | DONE | DONE | DONE    |
 | [switchboard-plug-locale]            | DONE | DONE | DONE    |
