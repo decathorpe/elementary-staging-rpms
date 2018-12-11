@@ -5,7 +5,7 @@
 
 Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard Date and Time plug
-Version:        2.1.4
+Version:        2.1.5
 Release:        1%{?dist}
 License:        GPLv3
 
@@ -22,8 +22,10 @@ BuildRequires:  pkgconfig(gthread-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(switchboard-2.0)
 
+Requires:       wingpanel-indicator-datetime
+
 Requires:       switchboard%{?_isa}
-Supplements:    switchboard%{?_isa}
+Supplements:    (switchboard%{?_isa} and wingpanel-indicator-datetime)
 
 
 %description
@@ -53,6 +55,9 @@ A switchboard plug to configure date and time settings.
 
 
 %changelog
+* Tue Dec 11 2018 Fabio Valentini <decathorpe@gmail.com> - 2.1.5-1
+- Update to version 2.1.5.
+
 * Tue Oct 09 2018 Fabio Valentini <decathorpe@gmail.com> - 2.1.4-1
 - Update to version 2.1.4.
 
