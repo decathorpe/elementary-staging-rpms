@@ -7,7 +7,7 @@
 
 Name:           switchboard-plug-locale
 Summary:        Adjust Locale settings from Switchboard
-Version:        2.4.0
+Version:        2.4.1
 Release:        1%{?dist}
 License:        LGPLv3
 
@@ -27,6 +27,8 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(ibus-1.0)
 BuildRequires:  pkgconfig(polkit-gobject-1)
 BuildRequires:  pkgconfig(switchboard-2.0)
+
+Requires:       libgweather
 
 Requires:       switchboard%{?_isa}
 Supplements:    switchboard%{?_isa}
@@ -69,6 +71,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Wed Dec 19 2018 Fabio Valentini <decathorpe@gmail.com> - 2.4.1-1
+- Update to version 2.4.1.
+
 * Fri Oct 19 2018 Fabio Valentini <decathorpe@gmail.com> - 2.4.0-1
 - Update to version 2.4.0.
 
