@@ -1,0 +1,33 @@
+From 376ad75e5da054162712a5ee73bec26f51e5a8ee Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20For=C3=A9?= <daniel@elementary.io>
+Date: Sat, 16 Feb 2019 15:38:35 -0800
+Subject: [PATCH] Utils: Fix getting current user on other distros
+
+---
+ src/Misc/Utils.vala | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/Misc/Utils.vala b/src/Misc/Utils.vala
+index f401da1..39f9b96 100644
+--- a/src/Misc/Utils.vala
++++ b/src/Misc/Utils.vala
+@@ -141,10 +141,17 @@ namespace SwitchboardPlugUserAccounts {
+     private static Act.User? current_user = null;
+ 
+     public static unowned Act.User? get_current_user () {
+-        if (current_user != null)
++        if (current_user != null) {
+             return current_user;
++        }
++
++        foreach (unowned Act.User user in get_usermanager ().list_users ()) {
++            if (user.get_user_name () == GLib.Environment.get_user_name ()) {
++                current_user = user;
++                break;
++            }
++        }
+ 
+-        current_user = get_usermanager ().get_user (GLib.Environment.get_user_name ());
+         return current_user;
+     }
+ 

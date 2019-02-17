@@ -6,11 +6,14 @@
 Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard User Accounts Plug
 Version:        2.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv3
 
 URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+
+# upstream patch to fix detection of the current user
+Patch0:         00-fix-user-detection.patch
 
 BuildRequires:  gettext
 BuildRequires:  meson
@@ -35,7 +38,7 @@ Switchboard Plug for managing local user accounts.
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 
 %build
@@ -60,6 +63,9 @@ Switchboard Plug for managing local user accounts.
 
 
 %changelog
+* Sun Feb 17 2019 Fabio Valentini <decathorpe@gmail.com> - 2.2.0-2
+- Add upstream patch to fix detection of the current user.
+
 * Tue Oct 23 2018 Fabio Valentini <decathorpe@gmail.com> - 2.2.0-1
 - Update to version 2.2.0.
 
