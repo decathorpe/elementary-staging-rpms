@@ -6,11 +6,14 @@
 Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard Date and Time plug
 Version:        2.1.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv3
 
 URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+
+# patch to use the "correct" gsettings schema for clock-format
+Patch0:         00-use-granite-gsettings-key.patch
 
 BuildRequires:  gettext
 BuildRequires:  meson
@@ -33,7 +36,7 @@ A switchboard plug to configure date and time settings.
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 
 %build
@@ -55,6 +58,9 @@ A switchboard plug to configure date and time settings.
 
 
 %changelog
+* Thu Apr 18 2019 Fabio Valentini <decathorpe@gmail.com> - 2.1.5-2
+- Add patch to use the correct GSettings schema for clock-format.
+
 * Tue Dec 11 2018 Fabio Valentini <decathorpe@gmail.com> - 2.1.5-1
 - Update to version 2.1.5.
 
