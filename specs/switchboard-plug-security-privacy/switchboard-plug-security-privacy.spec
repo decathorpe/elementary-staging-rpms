@@ -7,7 +7,7 @@
 
 Name:           switchboard-plug-security-privacy
 Summary:        Switchboard Privacy and Security Plug
-Version:        2.2.1
+Version:        2.2.2
 Release:        1%{?dist}
 License:        LGPLv3
 
@@ -72,6 +72,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Thu Oct 31 2019 Fabio Valentini <decathorpe@gmail.com> - 2.2.2-1
+- Update to version 2.2.2.
+
 * Sat Mar 16 2019 Fabio Valentini <decathorpe@gmail.com> - 2.2.1-1
 - Update to version 2.2.1.
 
@@ -119,5 +122,4 @@ appstream-util validate-relax --nonet \
 
 * Tue Aug 23 2016 Fabio Valentini <decathorpe@gmail.com> - 0.1.1-1
 - Update to version 0.1.1.
-
 

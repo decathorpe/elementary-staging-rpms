@@ -35,10 +35,10 @@
         "5": {
             "name": "switchboard-plug-security-privacy",
             "package_name": "switchboard-plug-security-privacy",
-            "package_version": "2.2.1",
+            "package_version": "2.2.2",
             "rpm_last_release": "1%{?dist}",
-            "rpm_last_version": "2.2.1",
-            "url_last_version": "2.2.1"
+            "rpm_last_version": "2.2.2",
+            "url_last_version": "2.2.2"
         },
         "6": {
             "name": "switchboard-plug-sharing",
