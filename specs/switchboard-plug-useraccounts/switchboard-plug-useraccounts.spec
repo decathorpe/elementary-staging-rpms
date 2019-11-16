@@ -2,10 +2,11 @@
 
 %global plug_name useraccounts
 %global plug_type system
+%global plug_rdnn io.elementary.switchboard.useraccounts
 
 Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard User Accounts Plug
-Version:        2.2.1
+Version:        2.3.0
 Release:        1%{?dist}
 License:        LGPLv3
 
@@ -13,6 +14,7 @@ URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  gettext
+BuildRequires:  libappstream-glib
 BuildRequires:  meson
 BuildRequires:  vala >= 0.34.1
 
@@ -20,7 +22,7 @@ BuildRequires:  pkgconfig(accountsservice)
 BuildRequires:  pkgconfig(gee-0.8)
 BuildRequires:  pkgconfig(glib-2.0) >= 2.32
 BuildRequires:  pkgconfig(gnome-desktop-3.0)
-BuildRequires:  pkgconfig(granite)
+BuildRequires:  pkgconfig(granite) >= 5.2.0
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(polkit-gobject-1)
 BuildRequires:  pkgconfig(pwquality)
@@ -35,7 +37,7 @@ Switchboard Plug for managing local user accounts.
 
 
 %prep
-%autosetup -p1
+%autosetup
 
 
 %build
@@ -49,17 +51,26 @@ Switchboard Plug for managing local user accounts.
 %find_lang %{plug_name}-plug
 
 
+%check
+appstream-util validate-relax --nonet \
+    %{buildroot}/%{_datadir}/metainfo/%{plug_rdnn}.appdata.xml
+
+
 %files -f %{plug_name}-plug.lang
 %doc README.md
 %license COPYING COPYRIGHT
 
-%{_libdir}/switchboard/system/lib%{plug_name}.so
+%{_libdir}/switchboard/%{plug_type}/lib%{plug_name}.so
 %{_libdir}/switchboard/system/pantheon-%{plug_name}/
 
-%{_datadir}/polkit-1/actions/org.pantheon.switchboard.user-accounts.policy
+%{_datadir}/metainfo/%{plug_rdnn}.appdata.xml
+%{_datadir}/polkit-1/actions/%{plug_rdnn}.policy
 
 
 %changelog
+* Sat Nov 16 2019 Fabio Valentini <decathorpe@gmail.com> - 2.3.0-1
+- Update to version 2.3.0.
+
 * Sat Mar 16 2019 Fabio Valentini <decathorpe@gmail.com> - 2.2.1-1
 - Update to version 2.2.1.
 
@@ -104,5 +115,4 @@ Switchboard Plug for managing local user accounts.
 
 * Tue Aug 23 2016 Fabio Valentini <decathorpe@gmail.com> - 0.1.3-1
 - Update to version 0.1.3.
-
 
