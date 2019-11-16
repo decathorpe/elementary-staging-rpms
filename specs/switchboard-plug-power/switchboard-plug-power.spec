@@ -2,11 +2,11 @@
 
 %global plug_name power
 %global plug_type hardware
-%global plug_rdnn io.elementary.switchboard.%{plug_name}
+%global plug_rdnn io.elementary.switchboard.power
 
 Name:           switchboard-plug-%{plug_name}
 Summary:        Switchboard Power Plug
-Version:        2.3.5
+Version:        2.4.0
 Release:        1%{?dist}
 License:        GPLv3
 
@@ -14,6 +14,7 @@ URL:            https://github.com/elementary/%{name}
 Source0:        https://github.com/elementary/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  gettext
+BuildRequires:  libappstream-glib
 BuildRequires:  meson
 BuildRequires:  vala >= 0.30.0
 
@@ -54,17 +55,20 @@ Control system power consumption with this Switchboard preference plug.
 %doc README.md
 %license COPYING
 
-%config(noreplace) %{_sysconfdir}/dbus-1/system.d/io.elementary.logind.helper.conf
-
 %{_libdir}/switchboard/%{plug_type}/lib%{plug_name}.so
 
 %{_libexecdir}/io.elementary.logind.helper
 
+%{_datadir}/dbus-1/system.d/io.elementary.logind.helper.conf
 %{_datadir}/dbus-1/system-services/io.elementary.logind.helper.service
-%{_datadir}/polkit-1/actions/%{plug_rdnn}.policy
+%{_datadir}/metainfo/%{plug_rdnn}.appdata.xml
+%{_datadir}/polkit-1/actions/io.elementary.switchboard.power.policy
 
 
 %changelog
+* Sat Nov 16 2019 Fabio Valentini <decathorpe@gmail.com> - 2.4.0-1
+- Update to version 2.4.0.
+
 * Tue Jan 29 2019 Fabio Valentini <decathorpe@gmail.com> - 2.3.5-1
 - Update to version 2.3.5.
 
